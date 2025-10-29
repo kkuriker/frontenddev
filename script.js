@@ -10,7 +10,7 @@ let isJumping = false;
 let obstacleInterval;
 let obstacleSpeed = 3000;
 
-// Saltul personajului
+
 function jump() {
   if (isJumping) return;
   isJumping = true;
@@ -22,7 +22,7 @@ function jump() {
   });
 }
 
-// Crearea obstacolelor
+
 function createObstacle() {
   const obstacle = document.createElement('div');
   obstacle.classList.add('obstacle');
@@ -31,7 +31,7 @@ function createObstacle() {
 
   obstacle.addEventListener('animationend', () => obstacle.remove());
 
-  // Verifică dacă jucătorul a trecut obstacolul
+
   const checkPassInterval = setInterval(() => {
     const obstacleRect = obstacle.getBoundingClientRect();
     const playerRect = player.getBoundingClientRect();
@@ -43,7 +43,7 @@ function createObstacle() {
     }
   }, 50);
 
-  // Detectează coliziunea
+
   const collisionInterval = setInterval(() => {
     if (isColliding(player, obstacle)) {
       gameOverSound.play();
@@ -55,7 +55,7 @@ function createObstacle() {
   }, 50);
 }
 
-// Detectarea coliziunilor
+
 function isColliding(player, obstacle) {
   const playerRect = player.getBoundingClientRect();
   const obstacleRect = obstacle.getBoundingClientRect();
@@ -68,21 +68,21 @@ function isColliding(player, obstacle) {
   );
 }
 
-// Start joc
+
 function startGame() {
   obstacleInterval = setInterval(() => {
     createObstacle();
 
-    // Crește nivelul și viteza după fiecare 5 obstacole trecute
+  
     if (score > 0 && score % 5 === 0) {
       level++;
       levelDisplay.textContent = level;
-      obstacleSpeed = Math.max(1000, obstacleSpeed - 200); // Obstacole mai rapide
+      obstacleSpeed = Math.max(1000, obstacleSpeed - 200); 
     }
   }, obstacleSpeed);
 }
 
-// Reset joc
+
 function resetGame() {
   score = 0;
   level = 1;
@@ -92,10 +92,10 @@ function resetGame() {
   startGame();
 }
 
-// Eveniment pentru salt
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Space') jump();
 });
 
 // Pornește jocul
+
 startGame();
